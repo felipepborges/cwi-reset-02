@@ -26,4 +26,5 @@ public class Filme {
                 "\nDuração: " + this.duracao + " min" +
                 "\nDiretor: " + this.diretor.getNome() + "\n";
     }
+
 }

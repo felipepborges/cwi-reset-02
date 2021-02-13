@@ -28,11 +28,11 @@ public class Aplicacao {
         **/
 
         //imprimindo informações dos diretores e atores
-        System.out.println(jamesCameron.informacoesDiretor());
-        System.out.println(zoeSaldana.informacoesAtor());
+        System.out.println(jamesCameron.getInformacao());
+        System.out.println(zoeSaldana.getInformacao());
 
-        System.out.println(christopherNolan.informacoesDiretor());
-        System.out.println(christianBale.informacoesAtor());
+        System.out.println(christopherNolan.getInformacao());
+        System.out.println(christianBale.getInformacao());
 
     }
 
