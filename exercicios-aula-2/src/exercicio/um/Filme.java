@@ -1,5 +1,7 @@
 package exercicio.um;
 
+import java.util.Locale;
+
 public class Filme {
 
     private String nome;
@@ -19,9 +21,9 @@ public class Filme {
     }
 
     public String reproduzir() {
-        return "Nome: " + nome +
-                "\nDescrição: " + descricao +
-                "\nDuração: " + duracao +
-                "\nDiretor: " + diretor.getNome() + "\n";
+        return "Nome: " + this.nome.toUpperCase(Locale.ROOT) +
+                "\nDescrição: " + this.descricao +
+                "\nDuração: " + this.duracao + " min" +
+                "\nDiretor: " + this.diretor.getNome() + "\n";
     }
 }
