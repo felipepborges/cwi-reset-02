@@ -18,7 +18,7 @@ public class Filme {
         this.diretor = diretor;
     }
 
-    public String toString() {
+    public String reproduzir() {
         return "Nome: " + nome +
                 "\nDescrição: " + descricao +
                 "\nDuração: " + duracao +

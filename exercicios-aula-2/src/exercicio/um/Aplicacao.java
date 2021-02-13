@@ -12,10 +12,9 @@ public class Aplicacao {
 
         Filme batman = new Filme("Batman: O Cavaleiro das Trevas", "Filme do Batman", 270, 2008,4.5, christopherNolan);
 
-        System.out.println(avatar.toString());
+        System.out.println(avatar.reproduzir());
 
-        System.out.println(batman.toString());
-
+        System.out.println(batman.reproduzir());
 
     }
 
