@@ -16,8 +16,9 @@ public class Filme {
         this.descricao = descricao;
         this.duracao = duracao;
         this.anoDeLancamento = anoDeLancamento;
-        this.avaliacao = avaliacao;
+        defineAvaliacao(avaliacao);
         this.diretor = diretor;
+
     }
 
     public String reproduzir() {
@@ -27,4 +28,23 @@ public class Filme {
                 "\nDiretor: " + this.diretor.getNome() + "\n";
     }
 
+    public void defineAvaliacao(double avaliacao){
+        if(nome.equalsIgnoreCase("O Clube da Luta")) {
+            this.avaliacao = 5;
+        } else if(nome.equalsIgnoreCase("Batman vs Superman")) {
+            this.avaliacao = 1;
+        }else if(avaliacao >= 1 && avaliacao <=5){
+            this.avaliacao=avaliacao;
+        } else{
+            this.avaliacao = 3;
+        }
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getAvaliacao() {
+        return avaliacao;
+    }
 }
