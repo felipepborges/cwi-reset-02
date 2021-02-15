@@ -1,4 +1,4 @@
-public class Imovel {
+public abstract class Imovel {
 
     private double valor;
     private Endereco endereco;
@@ -8,7 +8,7 @@ public class Imovel {
         this.valor = valor;
     }
     public String apresentacao(){
-        return  "Imóvel localizado no seguinte endereço: \n " +
+        return  "Imóvel localizado no seguinte endereço: \n" +
                 "Logradouro: " + endereco.getLogradouro() +
                 "\nNúmero: " + endereco.getNumero() +
                 "\nComplemento: " + endereco.getComplemento() +

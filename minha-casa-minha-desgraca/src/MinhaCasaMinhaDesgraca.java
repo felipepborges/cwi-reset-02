@@ -17,15 +17,19 @@ public class MinhaCasaMinhaDesgraca {
          * NÃO MODIFICAR ESTA CLASSE ANTES DESTA LINHA.
          */
 
-        Imovel imovel1 = new Imovel("Rua da Praia", 200, "", "Centro", "Porto Alegre", UnidadeFederativa.RIO_GRANDE_DO_SUL, 250000);
+        Imovel imovel1 = new Casa("Rua da Praia", 200, "", "Centro", "Porto Alegre", UnidadeFederativa.RIO_GRANDE_DO_SUL, 250000, true);
 
-        Imovel imovel2 = new Imovel("Rua Fortaleza", 550, "AP 405", "Centro", "Rio de Janeiro", UnidadeFederativa.RIO_DE_JANEIRO, 550000);
+        Imovel imovel2 = new Apartamento("Rua Fortaleza", 550, "AP 405", "Centro", "Rio de Janeiro", UnidadeFederativa.RIO_DE_JANEIRO, 550000, 4);
 
-        Imovel imovel3 = new Imovel("Rua 20 de Setembro", 700, "AP 303", "Bela Vista", "São Paulo", UnidadeFederativa.SAO_PAULO, 400000);
+        Imovel imovel3 = new Apartamento("Rua 20 de Setembro", 700, "AP 303", "Bela Vista", "São Paulo", UnidadeFederativa.SAO_PAULO, 400000, 3);
 
-        Imovel imovel4 = new Imovel("Rua 15 de Novembro", 330, "", "Bela Vista", "São Paulo", UnidadeFederativa.SAO_PAULO, 1250000);
+        Imovel imovel4 = new Casa("Rua 15 de Novembro", 330, "", "Bela Vista", "São Paulo", UnidadeFederativa.SAO_PAULO, 1250000, true);
 
-        Imovel imovel5 = new Imovel("Rua São Leopoldo", 110, "AP 510", "Centro", "São Leopoldo", UnidadeFederativa.RIO_GRANDE_DO_SUL, 120000);
+        Imovel imovel5 = new Apartamento("Rua São Leopoldo", 110, "AP 510", "Centro", "São Leopoldo", UnidadeFederativa.RIO_GRANDE_DO_SUL, 120000, 5);
+
+        Imovel imovel6 = new Casa("Rua Boa Vista", 330, "", "Boa Vista", "Portão", UnidadeFederativa.RIO_GRANDE_DO_SUL, 45000, false);
+
+        Imovel imovel7 = new Casa("Rua Floripa", 330, "", "Centro", "Florianópolis", UnidadeFederativa.SANTA_CATARINA, 150000, false);
 
 
         opcoesParaFinanciamento.registrarImovel(imovel1);
@@ -33,6 +37,8 @@ public class MinhaCasaMinhaDesgraca {
         opcoesParaFinanciamento.registrarImovel(imovel3);
         opcoesParaFinanciamento.registrarImovel(imovel4);
         opcoesParaFinanciamento.registrarImovel(imovel5);
+        opcoesParaFinanciamento.registrarImovel(imovel6);
+        opcoesParaFinanciamento.registrarImovel(imovel7);
 
 
         /**
@@ -105,7 +111,7 @@ public class MinhaCasaMinhaDesgraca {
                 beneficiario.getNome(),
                 DecimalFormat.getCurrencyInstance().format(beneficiario.getSalario()),
                 DecimalFormat.getCurrencyInstance().format(imovelEscolhido.getValor()),
-                imovelEscolhido.getEndereco().getEstado(),
+                imovelEscolhido.getEndereco().getEstado().getNome(), // só adicionei o getNome() pra sair o nome formatado
                 mesesParaPagamento);
         Thread.sleep(new Random().nextInt(4000) + 1000);
 
