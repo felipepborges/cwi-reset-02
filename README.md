@@ -6,9 +6,4 @@
 #
 #
 #
-### *Exercícios complementares*
-- Estou fazendo alguns exercícios complementares que ficarão salvos no diretório [*felipepborges/exercicios-java*](https://github.com/felipepborges/exercicios-java).
-#
-#
-#
 🚀
