@@ -12,7 +12,7 @@ public class Filme {
     private int anoDeLancamento;
     private double avaliacao;
     private Diretor diretor;
-    private List<Ator> elenco = new ArrayList<>();
+    private List<Pessoa> elenco;
 
     public Filme(String nome, String descricao, int duracao, int anoDeLancamento, double avaliacao, Diretor diretor, List elenco) {
         this.nome = nome;
@@ -33,9 +33,8 @@ public class Filme {
     }
 
     public void exibirCreditos(){
-        System.out.println("DIRETOR: \n\n" + diretor.getInformacao());
         System.out.println("ELENCO: \n");
-        for(Ator elenco : elenco){
+        for(Pessoa elenco : elenco){
             System.out.println(elenco.getInformacao());
         }
     }
