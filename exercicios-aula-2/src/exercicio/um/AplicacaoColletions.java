@@ -1,4 +1,6 @@
 package exercicio.um;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,11 +8,13 @@ public class AplicacaoColletions {
 
     public static void main(String[] args) {
 
-        Diretor christopherNolan = new Diretor("Christopher Nolan", 60, 10, Genero.MASCULINO);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-        Ator christianBale = new Ator("Christian Bale", 40, 3, Genero.MASCULINO);
-        Ator morganFreeman = new Ator("Morgan Freeman", 83, 5, Genero.MASCULINO);
-        Ator maggieGyllenhaal = new Ator("Maggie Gyllenhaal", 43, 2, Genero.FEMININO);
+        Diretor christopherNolan = new Diretor("Christopher Nolan", LocalDate.parse("30-07-1970", formatter), 10, Genero.MASCULINO);
+
+        Ator christianBale = new Ator("Christian Bale", LocalDate.parse("30-01-1974", formatter), 3, Genero.MASCULINO);
+        Ator morganFreeman = new Ator("Morgan Freeman", LocalDate.parse("01-06-1937", formatter), 5, Genero.MASCULINO);
+        Ator maggieGyllenhaal = new Ator("Maggie Gyllenhaal", LocalDate.parse("16-11-1977",formatter), 2, Genero.FEMININO);
 
         List<Pessoa> elencoBatman = new ArrayList<>();
         elencoBatman.add(christopherNolan);
