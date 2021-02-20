@@ -11,7 +11,7 @@ public class Aplicacao {
 
         // Filme avatar = new Filme("Avatar", "Ação no mundo alienígena de Pandora", 240, 2009, 4.5, jamesCameron);
         // avaliação = 6 para testar condicional
-        Filme avatar = new Filme("Avatar", "Ação no mundo alienígena de Pandora", 240, 2009, 6, jamesCameron);
+       // Filme avatar = new Filme("Avatar", "Ação no mundo alienígena de Pandora", 240, 2009, 6, jamesCameron);
 
 
 
@@ -21,7 +21,7 @@ public class Aplicacao {
 
         // Filme batman = new Filme("Batman: O Cavaleiro das Trevas", "Filme do Batman", 270, 2008,4.5, christopherNolan);
         // nome="O Clube da Luta" para testar condicional
-        Filme batman = new Filme("O Clube da Luta", "Filme do Batman", 270, 2008,4.5, christopherNolan);
+       // Filme batman = new Filme("O Clube da Luta", "Filme do Batman", 270, 2008,4.5, christopherNolan);
 
 
         /* primeira parte do exercício
@@ -39,8 +39,8 @@ public class Aplicacao {
         */
 
         //teste do condicional da avaliação
-        System.out.println(avatar.getAvaliacao());
-        System.out.println(batman.getAvaliacao());
+       // System.out.println(avatar.getAvaliacao());
+       // System.out.println(batman.getAvaliacao());
 
     }
 

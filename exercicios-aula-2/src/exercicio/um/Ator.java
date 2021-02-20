@@ -9,4 +9,11 @@ public class Ator extends Pessoa{
         this.numeroOscarsVencidos = numeroOscarsVencidos;
     }
 
+
+
+    public String getInformacao(){
+        return super.getInformacao() +
+                "Número de Oscars Vencidos: " + numeroOscarsVencidos + "\n";
+    }
+
 }

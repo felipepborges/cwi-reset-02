@@ -1,6 +1,8 @@
 package exercicio.um;
 
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.List;
 
 public class Filme {
 
@@ -10,14 +12,16 @@ public class Filme {
     private int anoDeLancamento;
     private double avaliacao;
     private Diretor diretor;
+    private List<Ator> elenco = new ArrayList<>();
 
-    public Filme(String nome, String descricao, int duracao, int anoDeLancamento, double avaliacao, Diretor diretor) {
+    public Filme(String nome, String descricao, int duracao, int anoDeLancamento, double avaliacao, Diretor diretor, List elenco) {
         this.nome = nome;
         this.descricao = descricao;
         this.duracao = duracao;
         this.anoDeLancamento = anoDeLancamento;
         defineAvaliacao(avaliacao);
         this.diretor = diretor;
+        this.elenco = elenco;
 
     }
 
@@ -26,6 +30,14 @@ public class Filme {
                 "\nDescrição: " + this.descricao +
                 "\nDuração: " + this.duracao + " min" +
                 "\nDiretor: " + this.diretor.getNome() + "\n";
+    }
+
+    public void exibirCreditos(){
+        System.out.println("DIRETOR: \n\n" + diretor.getInformacao());
+        System.out.println("ELENCO: \n");
+        for(Ator elenco : elenco){
+            System.out.println(elenco.getInformacao());
+        }
     }
 
     public void defineAvaliacao(double avaliacao){
