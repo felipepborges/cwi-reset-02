@@ -17,17 +17,29 @@ public class BancoDaDesgraca {
 
         ContaPoupanca conta2 = new ContaPoupanca(456,444, InstituicaoBancaria.BANCO_DO_BRASIL);
 
-        conta.depositar(100.00);
-        conta.sacar(50.00); // - R$1 de taxa
-        conta.depositar(1000.00);
-        conta.transferir(250.00, conta2); //-R$2.5 de taxa
+        ContaCorrente contaCorrenteItau = new ContaCorrente(555, InstituicaoBancaria.ITAU);
+        ContaDigital contaDigitalItau = new ContaDigital(556, contaCorrenteItau);
 
-        LocalDate data1 = LocalDate.of(2020, 7, 8);
+        //ContaDigital testeBradesco = new ContaDigital(149, contaCorrenteBradesco);
+
+
+        conta.depositar(100.00);
+        conta.sacar(50.00);
+        conta.depositar(1000.00);
+        conta.transferir(250.00, conta2);
+        conta.transferir(500.00, contaCorrenteBradesco);
+        contaCorrenteBradesco.sacar(50.00);
+        contaCorrenteBradesco.transferir(400.00, contaDigitalItau);
+        contaDigitalItau.transferir(100.00, conta2);
+
+        LocalDate data1 = LocalDate.of(2020, 6, 8);
         LocalDate data2 = null; //LocalDate.of(2020, 8, 18);
 
         conta.exibirExtrato(data1, data2);
         conta2.exibirExtrato(data1, data2);
-
+        contaCorrenteBradesco.exibirExtrato(data1, data2);
+        contaCorrenteItau.exibirExtrato(data1,data2);
+        contaDigitalItau.exibirExtrato(data1,data2);
         //System.out.println(conta.consultarSaldo());
 
 

@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class ContaDigital implements ContaBancaria{
 
-    private  Integer numeroContaDigital;
+    private Integer numeroContaDigital;
     private InstituicaoBancaria instituicaoBancaria;
     private double saldo;
     private double valorMinimoSaque = 10;
@@ -42,11 +42,12 @@ public class ContaDigital implements ContaBancaria{
     }
 
     private void verificaInstituicaoBancaria(InstituicaoBancaria instituicaoBancaria) {
-        if(instituicaoBancaria != InstituicaoBancaria.NUBANK || instituicaoBancaria != InstituicaoBancaria.ITAU){
+        if((instituicaoBancaria == InstituicaoBancaria.NUBANK) || (instituicaoBancaria == InstituicaoBancaria.ITAU)){
+            this.instituicaoBancaria = instituicaoBancaria;
+        }else {
             throw new InstituicaoBancariaException("\n\nSomente as instituições bancárias " + InstituicaoBancaria.NUBANK.getNome() +
                     " e " + InstituicaoBancaria.ITAU.getNome() + " permitem contas digitais.\n");
-        }else{
-            this.instituicaoBancaria = instituicaoBancaria;
+
         }
     }
 
@@ -65,7 +66,7 @@ public class ContaDigital implements ContaBancaria{
             Transacao deposito = new Transacao(TipoTransacao.DEPOSITO, valor);
             transacoes.add(deposito);
             this.saldo += valor;
-            System.out.println(deposito.exibeInformacoesTransacaoSemData() + toString());
+            System.out.println(deposito.exibeInformacoesTransacaoSemData() + " " + toString());
         }
     }
 
@@ -84,13 +85,19 @@ public class ContaDigital implements ContaBancaria{
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);
             transacoes.add(saque);
             saldo -= valor;
-            System.out.println(saque.exibeInformacoesTransacaoSemData() + toString());
+            System.out.println(saque.exibeInformacoesTransacaoSemData() + " da " + toString());
         }
     }
 
     public void transferir(Double valor, ContaBancaria contaDestino) {
         if(valor < 0){
             throw new ValorNegativoException();
+        }else {
+            saldo -= saldo;
+            Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
+            transacoes.add(transferencia);
+            contaDestino.depositar(valor);
+            System.out.println(transferencia.exibeInformacoesTransacaoSemData() + toString() + " para " + contaDestino.toString());
         }
 
     }

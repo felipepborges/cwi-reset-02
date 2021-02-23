@@ -9,9 +9,7 @@ import br.com.banco.desgraca.exception.SaqueException;
 import br.com.banco.desgraca.exception.ValorNegativoException;
 
 import java.text.DecimalFormat;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,7 @@ public class ContaPoupanca implements ContaBancaria{
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     Locale brasil = new Locale( "pt", "BR" );
 
-    ////Construtuor para cadastrar conta corrente e conta poupança
+    //Construtuor para cadastrar conta corrente e conta poupança
     public ContaPoupanca(Integer numeroContaPoupanca, Integer numeroContaCorrente ,InstituicaoBancaria instituicaoBancaria) {
         this.numeroContaPoupanca = numeroContaPoupanca;
         verificaInstituicaoBancaria(instituicaoBancaria);

@@ -44,7 +44,7 @@ public class ContaCorrente implements ContaBancaria{
             Transacao deposito = new Transacao(TipoTransacao.DEPOSITO, valor);
             transacoes.add(deposito);
             this.saldo += valor;
-            System.out.println(deposito.exibeInformacoesTransacaoSemData() + toString());
+            System.out.println(deposito.exibeInformacoesTransacaoSemData() + " " + toString());
         }
     }
 
@@ -63,7 +63,7 @@ public class ContaCorrente implements ContaBancaria{
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);
             transacoes.add(saque);
             saldo -= valor;
-            System.out.println(saque.exibeInformacoesTransacaoSemData() + toString());
+            System.out.println(saque.exibeInformacoesTransacaoSemData() + " da " + toString());
         }
     }
 
