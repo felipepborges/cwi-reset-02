@@ -1,7 +1,6 @@
 package br.com.banco.desgraca;
 
 import br.com.banco.desgraca.domain.InstituicaoBancaria;
-import br.com.banco.desgraca.domain.conta.ContaBancaria;
 import br.com.banco.desgraca.domain.conta.ContaCorrente;
 import br.com.banco.desgraca.domain.conta.ContaDigital;
 import br.com.banco.desgraca.domain.conta.ContaPoupanca;
@@ -23,12 +22,13 @@ public class BancoDaDesgraca {
         conta.depositar(1000.00);
         conta.transferir(250.00, conta2); //-R$2.5 de taxa
 
-        LocalDate data1 = LocalDate.of(2020, 06, 8);
-        LocalDate data2 = LocalDate.of(2020, 07, 18);
+        LocalDate data1 = LocalDate.of(2020, 7, 8);
+        LocalDate data2 = null; //LocalDate.of(2020, 8, 18);
 
         conta.exibirExtrato(data1, data2);
         conta2.exibirExtrato(data1, data2);
-        System.out.println(conta.consultarSaldo());
+
+        //System.out.println(conta.consultarSaldo());
 
 
     }

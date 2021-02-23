@@ -100,17 +100,16 @@ public class ContaDigital implements ContaBancaria{
         System.out.println("----EXTRATO CONTA POUPANÇA " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaDigital);
 
         for(Transacao transacao : transacoes){
-            if(inicio == null && fim == null || inicio == null && transacao.getDataTransacao().isBefore(fim) ||
-                    transacao.getDataTransacao().isAfter(inicio) == true && fim == null ||
-                    transacao.getDataTransacao().isAfter(inicio) == true && transacao.getDataTransacao().isBefore(fim) == true) {
+            if((inicio == null && fim == null) ||
+                    (inicio == null && transacao.getDataTransacao().isBefore(fim)) ||
+                    ((inicio == null || transacao.getDataTransacao().isAfter(inicio)) && fim == null) ||
+                    ((inicio == null || transacao.getDataTransacao().isAfter(inicio)) && transacao.getDataTransacao().isBefore(fim))) {
                 System.out.printf("%-2s %-15s %-1s\n", transacao.getTipoTransacao().getSimbolo(),
                         DecimalFormat.getCurrencyInstance(brasil).format(transacao.getValorTransacao()),
                         transacao.getDataTransacao().format(formatter));
             }
-
         }
         System.out.println("----");
-
     }
 
     public String toString(){

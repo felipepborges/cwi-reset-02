@@ -9,7 +9,9 @@ import br.com.banco.desgraca.exception.SaqueException;
 import br.com.banco.desgraca.exception.ValorNegativoException;
 
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,14 +115,14 @@ public class ContaPoupanca implements ContaBancaria{
         System.out.println("----EXTRATO CONTA POUPANÇA " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaPoupanca);
 
         for(Transacao transacao : transacoes){
-            if(inicio == null && fim == null || inicio == null && transacao.getDataTransacao().isBefore(fim) ||
-                    transacao.getDataTransacao().isAfter(inicio) == true && fim == null ||
-                    transacao.getDataTransacao().isAfter(inicio) == true && transacao.getDataTransacao().isBefore(fim) == true) {
+            if((inicio == null && fim == null) ||
+                    (inicio == null && transacao.getDataTransacao().isBefore(fim)) ||
+                    ((inicio == null || transacao.getDataTransacao().isAfter(inicio)) && fim == null) ||
+                    ((inicio == null || transacao.getDataTransacao().isAfter(inicio)) && transacao.getDataTransacao().isBefore(fim))) {
                 System.out.printf("%-2s %-15s %-1s\n", transacao.getTipoTransacao().getSimbolo(),
                         DecimalFormat.getCurrencyInstance(brasil).format(transacao.getValorTransacao()),
                         transacao.getDataTransacao().format(formatter));
             }
-
         }
         System.out.println("----");
     }
