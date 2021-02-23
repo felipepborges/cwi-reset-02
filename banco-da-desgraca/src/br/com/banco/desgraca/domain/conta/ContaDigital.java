@@ -79,7 +79,7 @@ public class ContaDigital implements ContaBancaria{
 
         }else if(valor <= 10){
             throw new SaqueException("\n\nO valor mínimo para solicitação de saque é de " +
-                    DecimalFormat.getCurrencyInstance().format(valorMinimoSaque) + "\n");
+                    DecimalFormat.getCurrencyInstance(brasil).format(valorMinimoSaque) + "\n");
 
         }else{
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);
@@ -97,14 +97,14 @@ public class ContaDigital implements ContaBancaria{
             Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
             transacoes.add(transferencia);
             contaDestino.depositar(valor);
-            System.out.println(transferencia.exibeInformacoesTransacaoSemData() + toString() + " para " + contaDestino.toString());
+            System.out.println(transferencia.exibeInformacoesTransacaoSemData() + " da " + toString() + " para " + contaDestino.toString());
         }
 
     }
 
     public void exibirExtrato(LocalDate inicio, LocalDate fim) {
 
-        System.out.println("----EXTRATO CONTA POUPANÇA " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaDigital);
+        System.out.println("----EXTRATO CONTA DIGITAL " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaDigital);
 
         for(Transacao transacao : transacoes){
             if((inicio == null && fim == null) ||

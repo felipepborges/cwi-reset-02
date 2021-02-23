@@ -79,7 +79,7 @@ public class ContaPoupanca implements ContaBancaria{
 
         } else if (valor < valorMinimoSaque) {
             throw new SaqueException("\n\nO valor mínimo para solicitação de saque é de " +
-                    DecimalFormat.getCurrencyInstance().format(valorMinimoSaque) + "\n");
+                    DecimalFormat.getCurrencyInstance(brasil).format(valorMinimoSaque) + "\n");
         } else {
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);
             transacoes.add(saque);

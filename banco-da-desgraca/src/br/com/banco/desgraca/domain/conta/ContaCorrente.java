@@ -85,12 +85,12 @@ public class ContaCorrente implements ContaBancaria{
 
         Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
         transacoes.add(transferencia);
-        System.out.println(transferencia.exibeInformacoesTransacaoSemData() + toString() + " para " + contaDestino.toString());
+        System.out.println(transferencia.exibeInformacoesTransacaoSemData() + " da " + toString() + " para " + contaDestino.toString());
     }
 
     public void exibirExtrato(LocalDate inicio, LocalDate fim) {
 
-        System.out.println("----EXTRATO CONTA POUPANÇA " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaCorrente);
+        System.out.println("----EXTRATO CONTA CORRENTE " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaCorrente);
 
         for(Transacao transacao : transacoes){
             if((inicio == null && fim == null) ||

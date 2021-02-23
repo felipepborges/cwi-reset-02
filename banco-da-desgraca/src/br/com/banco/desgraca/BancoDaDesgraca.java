@@ -5,11 +5,15 @@ import br.com.banco.desgraca.domain.conta.ContaCorrente;
 import br.com.banco.desgraca.domain.conta.ContaDigital;
 import br.com.banco.desgraca.domain.conta.ContaPoupanca;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class BancoDaDesgraca {
 
     public static void main(String[] args) throws Exception {
+
+        Locale brasil = new Locale( "pt", "BR" );
 
         ContaCorrente contaCorrenteBradesco = new ContaCorrente(7777, InstituicaoBancaria.BRADESCO);
 
@@ -32,7 +36,7 @@ public class BancoDaDesgraca {
         contaCorrenteBradesco.transferir(400.00, contaDigitalItau);
         contaDigitalItau.transferir(100.00, conta2);
 
-        LocalDate data1 = null; LocalDate.of(2020, 7, 18);
+        LocalDate data1 = null; //LocalDate.of(2020, 7, 18);
         LocalDate data2 = null; //LocalDate.of(2020, 8, 18);
 
         conta.exibirExtrato(data1, data2);
@@ -40,7 +44,8 @@ public class BancoDaDesgraca {
         contaCorrenteBradesco.exibirExtrato(data1, data2);
         contaCorrenteItau.exibirExtrato(data1,data2);
         contaDigitalItau.exibirExtrato(data1,data2);
-        System.out.println(conta.consultarSaldo());
+
+        System.out.println(DecimalFormat.getCurrencyInstance(brasil).format(conta.consultarSaldo()));
 
 
     }

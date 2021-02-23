@@ -5,12 +5,15 @@ import br.com.banco.desgraca.Data;
 import java.time.LocalDate;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class Transacao {
 
     private TipoTransacao tipoTransacao;
     private LocalDate dataTransacao;
     private Double valorTransacao;
+
+    Locale brasil = new Locale( "pt", "BR" );
 
     public Transacao(TipoTransacao tipoTransacao, Double valorTransacao) {
         this.tipoTransacao = tipoTransacao;
@@ -32,6 +35,6 @@ public class Transacao {
     }
 
     public String exibeInformacoesTransacaoSemData(){
-        return tipoTransacao.getNome() + " no valor de " + DecimalFormat.getCurrencyInstance().format(valorTransacao);
+        return tipoTransacao.getNome() + " no valor de " + DecimalFormat.getCurrencyInstance(brasil).format(valorTransacao);
     }
 }
