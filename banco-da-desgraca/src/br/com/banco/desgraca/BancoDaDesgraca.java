@@ -32,7 +32,7 @@ public class BancoDaDesgraca {
         contaCorrenteBradesco.transferir(400.00, contaDigitalItau);
         contaDigitalItau.transferir(100.00, conta2);
 
-        LocalDate data1 = LocalDate.of(2020, 6, 8);
+        LocalDate data1 = null; LocalDate.of(2020, 7, 18);
         LocalDate data2 = null; //LocalDate.of(2020, 8, 18);
 
         conta.exibirExtrato(data1, data2);
@@ -40,7 +40,7 @@ public class BancoDaDesgraca {
         contaCorrenteBradesco.exibirExtrato(data1, data2);
         contaCorrenteItau.exibirExtrato(data1,data2);
         contaDigitalItau.exibirExtrato(data1,data2);
-        //System.out.println(conta.consultarSaldo());
+        System.out.println(conta.consultarSaldo());
 
 
     }

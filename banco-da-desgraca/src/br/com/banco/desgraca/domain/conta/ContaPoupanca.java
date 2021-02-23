@@ -114,9 +114,9 @@ public class ContaPoupanca implements ContaBancaria{
 
         for(Transacao transacao : transacoes){
             if((inicio == null && fim == null) ||
-                    (inicio == null && transacao.getDataTransacao().isBefore(fim)) ||
                     ((inicio == null || transacao.getDataTransacao().isAfter(inicio)) && fim == null) ||
                     ((inicio == null || transacao.getDataTransacao().isAfter(inicio)) && transacao.getDataTransacao().isBefore(fim))) {
+
                 System.out.printf("%-2s %-15s %-1s\n", transacao.getTipoTransacao().getSimbolo(),
                         DecimalFormat.getCurrencyInstance(brasil).format(transacao.getValorTransacao()),
                         transacao.getDataTransacao().format(formatter));
