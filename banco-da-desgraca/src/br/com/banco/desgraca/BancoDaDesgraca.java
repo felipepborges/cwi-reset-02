@@ -36,8 +36,8 @@ public class BancoDaDesgraca {
         contaCorrenteBradesco.transferir(400.00, contaDigitalItau);
         contaDigitalItau.transferir(100.00, conta2);
 
-        LocalDate data1 = null; //LocalDate.of(2020, 7, 18);
-        LocalDate data2 = null; //LocalDate.of(2020, 8, 18);
+        LocalDate data1 = null; //LocalDate.of(2020, 7, 1);
+        LocalDate data2 = LocalDate.of(2020, 9, 7);
 
         conta.exibirExtrato(data1, data2);
         conta2.exibirExtrato(data1, data2);
@@ -46,7 +46,6 @@ public class BancoDaDesgraca {
         contaDigitalItau.exibirExtrato(data1,data2);
 
         System.out.println(DecimalFormat.getCurrencyInstance(brasil).format(conta.consultarSaldo()));
-
 
     }
 

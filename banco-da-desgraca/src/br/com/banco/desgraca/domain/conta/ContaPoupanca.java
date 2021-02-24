@@ -3,10 +3,7 @@ package br.com.banco.desgraca.domain.conta;
 import br.com.banco.desgraca.domain.InstituicaoBancaria;
 import br.com.banco.desgraca.domain.TipoTransacao;
 import br.com.banco.desgraca.domain.Transacao;
-import br.com.banco.desgraca.exception.InstituicaoBancariaException;
-import br.com.banco.desgraca.exception.SaldoInsuficienteException;
-import br.com.banco.desgraca.exception.SaqueException;
-import br.com.banco.desgraca.exception.ValorNegativoException;
+import br.com.banco.desgraca.exception.*;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;

@@ -76,15 +76,14 @@ public class ContaCorrente implements ContaBancaria{
 
         } else if(contaDestino.getInstituicaoBancaria() != this.instituicaoBancaria){
             saldo = saldo - valor*(1+0.01);
-            contaDestino.depositar(valor);
 
         } else {
             saldo -= saldo;
-            contaDestino.depositar(valor);
         }
 
         Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
         transacoes.add(transferencia);
+        contaDestino.depositar(valor);
         System.out.println(transferencia.exibeInformacoesTransacaoSemData() + " da " + toString() + " para " + contaDestino.toString());
     }
 
