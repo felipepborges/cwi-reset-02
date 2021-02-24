@@ -20,7 +20,7 @@ public class ContaDigital implements ContaBancaria{
     private Integer numeroContaDigital;
     private InstituicaoBancaria instituicaoBancaria;
     private double saldo;
-    private double valorMinimoSaque = 10;
+    private static final Double VALOR_MINIMO_SAQUE = 10.0;
     private List<Transacao> transacoes = new ArrayList<>();
     private ContaCorrente contaCorrente;
 
@@ -79,7 +79,7 @@ public class ContaDigital implements ContaBancaria{
 
         }else if(valor <= 10){
             throw new SaqueException("\n\nO valor mínimo para solicitação de saque é de " +
-                    DecimalFormat.getCurrencyInstance(brasil).format(valorMinimoSaque) + "\n");
+                    DecimalFormat.getCurrencyInstance(brasil).format(VALOR_MINIMO_SAQUE) + "\n");
 
         }else{
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);

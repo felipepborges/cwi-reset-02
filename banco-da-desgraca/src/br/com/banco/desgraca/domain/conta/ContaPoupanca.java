@@ -18,7 +18,7 @@ public class ContaPoupanca implements ContaBancaria{
     private InstituicaoBancaria instituicaoBancaria;
     private double saldo;
     private List<Transacao> transacoes = new ArrayList<>();
-    private double valorMinimoSaque = 50;
+    private static final Double VALOR_MINIMO_SAQUE = 50.0;
     private ContaCorrente contaCorrente;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -74,9 +74,9 @@ public class ContaPoupanca implements ContaBancaria{
         } else if (saldo < valor) {
             throw new SaldoInsuficienteException();
 
-        } else if (valor < valorMinimoSaque) {
+        } else if (valor < VALOR_MINIMO_SAQUE) {
             throw new SaqueException("\n\nO valor mínimo para solicitação de saque é de " +
-                    DecimalFormat.getCurrencyInstance(brasil).format(valorMinimoSaque) + "\n");
+                    DecimalFormat.getCurrencyInstance(brasil).format(VALOR_MINIMO_SAQUE) + "\n");
         } else {
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);
             transacoes.add(saque);
