@@ -2,13 +2,20 @@ package com.company.heranca;
 
 import com.company.enumerador.Genero;
 
+import java.time.LocalDate;
+
 public class Diretor extends Pessoa {
 
-    private Integer quantidadeFilmesDirigidos;
+    private int quantidadeFilmesDirigidos;
 
-    public Diretor(String nome, Integer idade, Integer quantidadeFilmesDirigidos, Genero genero) {
-        super(nome, idade, genero);
+    public Diretor(String nome, LocalDate dataNascimento, int quantidadeFilmesDirigidos, Genero genero) {
+        super(nome, dataNascimento, genero);
         this.quantidadeFilmesDirigidos = quantidadeFilmesDirigidos;
+    }
+
+    public String getInformacao(){
+        return super.getInformacao() +
+                "Número de filmes dirigidos: " + quantidadeFilmesDirigidos + "\n";
     }
 
 }

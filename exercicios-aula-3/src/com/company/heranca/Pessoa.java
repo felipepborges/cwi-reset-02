@@ -2,22 +2,30 @@ package com.company.heranca;
 
 import com.company.enumerador.Genero;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Pessoa {
 
     private String nome;
-    private int idade;
+    private LocalDate dataNascimento;
     private Genero genero;
+    private int idade;
 
-    public Pessoa(String nome, int idade, Genero genero) {
+    public Pessoa(String nome, LocalDate dataNascimento, Genero genero) {
         this.nome = nome;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
         this.genero = genero;
     }
 
-    public void imprimirInformacoes() {
-        System.out.println("Nome: " + this.nome);
-        System.out.println("Idade: " + this.idade);
-        System.out.println("Genero: " + this.genero.getDescricao());
+    public int getIdade() {
+        return Period.between(this.dataNascimento, LocalDate.now()).getYears();
+    }
+
+    public String getInformacao(){
+        return "Nome: " + this.nome +
+                "\nIdade: " +  getIdade() + " anos" +
+                "\nGênero: " + this.genero.toString() + "\n";
     }
 
     public String getNome() {

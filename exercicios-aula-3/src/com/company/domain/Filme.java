@@ -1,47 +1,64 @@
 package com.company.domain;
 
 import com.company.heranca.Diretor;
+import com.company.heranca.Pessoa;
+
+import java.util.Locale;
+import java.util.List;
 
 public class Filme {
 
     private String nome;
     private String descricao;
-    private Integer duracao;
-    private Integer anoLancamento;
-    private Integer avaliacao;
-    private Diretor diretor;
+    private int duracao;
+    private int anoDeLancamento;
+    private double avaliacao;
+    private Pessoa diretor;
+    private List<Pessoa> elenco;
 
-    public Filme(String nome, String descricao, Integer duracao, Integer anoLancamento, Integer avaliacao, Diretor diretor) {
-        defineAvaliacao(avaliacao);
-        validaNomeEDefineAvaliacao(nome);
+    public Filme(String nome, String descricao, int duracao, int anoDeLancamento, double avaliacao, Pessoa diretor, List elenco) {
         this.nome = nome;
         this.descricao = descricao;
         this.duracao = duracao;
-        this.anoLancamento = anoLancamento;
+        this.anoDeLancamento = anoDeLancamento;
+        defineAvaliacao(avaliacao);
         this.diretor = diretor;
+        this.elenco = elenco;
+
     }
 
-    public void reproduzir() {
-        System.out.println("Nome do Filme: " + this.nome);
-        System.out.println("Descrição: " + this.descricao);
-        System.out.println("Duração: " + this.duracao);
-        System.out.println("Nome do Diretor: " + this.diretor.getNome());
+    public String reproduzir() {
+        return "Nome: " + this.nome.toUpperCase(Locale.ROOT) +
+                "\nDescrição: " + this.descricao +
+                "\nDuração: " + this.duracao + " min" +
+                "\nDiretor: " + this.diretor.getNome() + "\n";
     }
 
-    private void defineAvaliacao(Integer avaliacao) {
-        if (avaliacao < 1 || avaliacao > 5) {
-            throw new IllegalArgumentException("\n\nValor não permitido. Você deve digitar um valor entre 1 e 5.");
-        } else {
-            this.avaliacao = avaliacao;
+    public void exibirCreditos(){
+        System.out.println("ELENCO: \n");
+        for(Pessoa elenco : elenco){
+            System.out.println(elenco.getInformacao());
         }
     }
 
-    private void validaNomeEDefineAvaliacao(String nome) {
-        if ("Batman vs Superman".equals(nome)) {
-            this.avaliacao = 1;
-        } else if ("Interestelar".equals(nome)) {
+    public void defineAvaliacao(double avaliacao){
+        if(nome.equalsIgnoreCase("O Clube da Luta")) {
             this.avaliacao = 5;
+        } else if(nome.equalsIgnoreCase("Batman vs Superman")) {
+            this.avaliacao = 1;
+        }else if(avaliacao >= 1 && avaliacao <=5){
+            this.avaliacao=avaliacao;
+        } else{
+            this.avaliacao = 3;
         }
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getAvaliacao() {
+        return avaliacao;
     }
 
 }
