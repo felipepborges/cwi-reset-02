@@ -18,8 +18,9 @@ public class ContaCorrente implements ContaBancaria{
 
     private Integer numeroContaCorrente;
     private InstituicaoBancaria instituicaoBancaria;
-    private double saldo;
+    private Double saldo;
     private List<Transacao> transacoes = new ArrayList<>();
+    private static final Double TAXA_TRANSFERENCIA_OUTRAS_INSTITUICOES = 0.01;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     Locale brasil = new Locale( "pt", "BR" );
@@ -27,6 +28,7 @@ public class ContaCorrente implements ContaBancaria{
     public ContaCorrente(Integer numeroContaCorrente, InstituicaoBancaria instituicaoBancaria) {
         this.numeroContaCorrente = numeroContaCorrente;
         this.instituicaoBancaria = instituicaoBancaria;
+        this.saldo = 0.0;
     }
 
     public InstituicaoBancaria getInstituicaoBancaria() {
@@ -75,10 +77,10 @@ public class ContaCorrente implements ContaBancaria{
             throw new SaldoInsuficienteException();
 
         } else if(contaDestino.getInstituicaoBancaria() != this.instituicaoBancaria){
-            saldo = saldo - valor*(1+0.01);
+            saldo = saldo - valor*(1 + TAXA_TRANSFERENCIA_OUTRAS_INSTITUICOES);
 
         } else {
-            saldo -= saldo;
+            saldo -= valor;
         }
 
         Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
@@ -89,7 +91,7 @@ public class ContaCorrente implements ContaBancaria{
 
     public void exibirExtrato(LocalDate inicio, LocalDate fim) {
 
-        System.out.println("----EXTRATO CONTA CORRENTE " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaCorrente);
+        System.out.println("----EXTRATO " + toString().toUpperCase());
 
         for(Transacao transacao : transacoes){
             if((inicio == null && fim == null) ||

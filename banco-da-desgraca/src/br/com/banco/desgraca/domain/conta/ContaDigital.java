@@ -19,26 +19,17 @@ public class ContaDigital implements ContaBancaria{
 
     private Integer numeroContaDigital;
     private InstituicaoBancaria instituicaoBancaria;
-    private double saldo;
+    private Double saldo;
     private static final Double VALOR_MINIMO_SAQUE = 10.0;
     private List<Transacao> transacoes = new ArrayList<>();
-    private ContaCorrente contaCorrente;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     Locale brasil = new Locale( "pt", "BR" );
 
-    //Construtuor para cadastrar conta corrente e conta digital
-    public ContaDigital(Integer numeroContaDigital, Integer numeroContaCorrente ,InstituicaoBancaria instituicaoBancaria) {
+    public ContaDigital(Integer numeroContaDigital ,InstituicaoBancaria instituicaoBancaria) {
         this.numeroContaDigital = numeroContaDigital;
         verificaInstituicaoBancaria(instituicaoBancaria);
-        contaCorrente = new ContaCorrente(numeroContaCorrente, instituicaoBancaria);
-    }
-
-    //Contrutor para cadastrar conta digital com conta correnta já existente
-    public ContaDigital(Integer numeroContaDigital, ContaCorrente contaCorrente) {
-        this.numeroContaDigital = numeroContaDigital;
-        verificaInstituicaoBancaria(contaCorrente.getInstituicaoBancaria());
-        this.contaCorrente = contaCorrente;
+        this.saldo = 0.0;
     }
 
     private void verificaInstituicaoBancaria(InstituicaoBancaria instituicaoBancaria) {
@@ -77,7 +68,7 @@ public class ContaDigital implements ContaBancaria{
         }else if (saldo < valor) {
             throw new SaldoInsuficienteException();
 
-        }else if(valor <= 10){
+        }else if(valor <= VALOR_MINIMO_SAQUE){
             throw new SaqueException("\n\nO valor mínimo para solicitação de saque é de " +
                     DecimalFormat.getCurrencyInstance(brasil).format(VALOR_MINIMO_SAQUE) + "\n");
 
@@ -93,7 +84,7 @@ public class ContaDigital implements ContaBancaria{
         if(valor < 0){
             throw new ValorNegativoException();
         }else {
-            saldo -= saldo;
+            saldo -= valor;
             Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
             transacoes.add(transferencia);
             contaDestino.depositar(valor);
@@ -104,7 +95,7 @@ public class ContaDigital implements ContaBancaria{
 
     public void exibirExtrato(LocalDate inicio, LocalDate fim) {
 
-        System.out.println("----EXTRATO CONTA DIGITAL " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaDigital);
+        System.out.println("----EXTRATO " + toString().toUpperCase());
 
         for(Transacao transacao : transacoes){
             if((inicio == null && fim == null) ||

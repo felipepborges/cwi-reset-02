@@ -14,7 +14,7 @@ public class BancoDaDesgraca {
     public static void main(String[] args) throws Exception {
 
         Locale brasil = new Locale( "pt", "BR" );
-
+        /*
         ContaCorrente contaCorrenteBradesco = new ContaCorrente(7777, InstituicaoBancaria.BRADESCO);
 
         ContaPoupanca conta = new ContaPoupanca(123, contaCorrenteBradesco);
@@ -46,6 +46,8 @@ public class BancoDaDesgraca {
         contaDigitalItau.exibirExtrato(data1,data2);
 
         System.out.println(DecimalFormat.getCurrencyInstance(brasil).format(conta.consultarSaldo()));
+
+         */
 
     }
 

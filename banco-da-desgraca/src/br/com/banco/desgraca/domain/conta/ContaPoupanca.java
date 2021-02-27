@@ -16,26 +16,21 @@ public class ContaPoupanca implements ContaBancaria{
 
     private Integer numeroContaPoupanca;
     private InstituicaoBancaria instituicaoBancaria;
-    private double saldo;
+    private Double saldo;
     private List<Transacao> transacoes = new ArrayList<>();
     private static final Double VALOR_MINIMO_SAQUE = 50.0;
-    private ContaCorrente contaCorrente;
+    private static final Double TAXA_SAQUE = 0.02;
+    private static final Double TAXA_TRANSFERENCIA_MESMA_INSTITUICAO = 0.005;
+    private static final Double TAXA_TRANSFERENCIA_OUTRAS_INSTITUICOES = 0.01;
+
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     Locale brasil = new Locale( "pt", "BR" );
 
-    //Construtuor para cadastrar conta corrente e conta poupança
-    public ContaPoupanca(Integer numeroContaPoupanca, Integer numeroContaCorrente ,InstituicaoBancaria instituicaoBancaria) {
+    public ContaPoupanca(Integer numeroContaPoupanca, InstituicaoBancaria instituicaoBancaria) {
         this.numeroContaPoupanca = numeroContaPoupanca;
         verificaInstituicaoBancaria(instituicaoBancaria);
-        contaCorrente = new ContaCorrente(numeroContaCorrente, instituicaoBancaria);
-    }
-
-    //Contrutor para cadastrar conta digital com conta correnta já existente
-    public ContaPoupanca(Integer numeroContaPoupanca, ContaCorrente contaCorrente) {
-        this.numeroContaPoupanca = numeroContaPoupanca;
-        verificaInstituicaoBancaria(contaCorrente.getInstituicaoBancaria());
-        this.contaCorrente = contaCorrente;
+        this.saldo = 0.0;
     }
 
     private void verificaInstituicaoBancaria(InstituicaoBancaria instituicaoBancaria) {
@@ -80,7 +75,7 @@ public class ContaPoupanca implements ContaBancaria{
         } else {
             Transacao saque = new Transacao(TipoTransacao.SAQUE, valor);
             transacoes.add(saque);
-            saldo = saldo - valor * (1 + 0.02); // taxa de 2% para saques
+            saldo = saldo - valor * (1 + TAXA_SAQUE); // taxa de 2% para saques
             System.out.println(saque.exibeInformacoesTransacaoSemData() + " da " + toString());
         }
     }
@@ -93,10 +88,10 @@ public class ContaPoupanca implements ContaBancaria{
             throw new SaldoInsuficienteException();
 
         } else if(contaDestino.getInstituicaoBancaria() == this.instituicaoBancaria){
-            saldo = saldo - valor*(1+0.005); //taxa de 0.5% para transferências entre contas da mesma instituição bancária
+            saldo = saldo - valor*(1 + TAXA_TRANSFERENCIA_MESMA_INSTITUICAO); //taxa de 0.5% para transferências entre contas da mesma instituição bancária
 
         } else {
-            saldo = saldo - valor*(1+0.01); //taxa de 1% para transferências entre contas de instituições diferentes
+            saldo = saldo - valor*(1 + TAXA_TRANSFERENCIA_OUTRAS_INSTITUICOES); //taxa de 1% para transferências entre contas de instituições diferentes
         }
 
         Transacao transferencia = new Transacao(TipoTransacao.TRANSFERENCIA, valor);
@@ -107,7 +102,7 @@ public class ContaPoupanca implements ContaBancaria{
 
     public void exibirExtrato(LocalDate inicio, LocalDate fim) {
 
-        System.out.println("----EXTRATO CONTA POUPANÇA " + instituicaoBancaria.getNome().toUpperCase(Locale.ROOT) + " " + numeroContaPoupanca);
+        System.out.println("----EXTRATO " + toString().toUpperCase());
 
         for(Transacao transacao : transacoes){
             if((inicio == null && fim == null) ||
