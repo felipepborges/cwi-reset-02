@@ -39,4 +39,13 @@ public class FilmesService {
         FilmeEntity filmeSalvar = MAPPER_ENTITY.mapear(request);
         return filmesRepository.criarFilme(filmeSalvar);
     }
+
+    public void assistirFilme(Long id) {
+        filmesRepository.assistir(id);
+    }
+
+    public List<FilmeResponse> getRecomendacoesFilmes() {
+        List<FilmeEntity> recomencacoes = filmesRepository.getRecomendacoes();
+        return MAPPER_RESPONSE.mapear(recomencacoes);
+    }
 }

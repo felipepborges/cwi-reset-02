@@ -46,13 +46,12 @@ public class FilmesController implements FilmesContract {
     @Override
     @GetMapping("/recomendacoes")
     public List<FilmeResponse> getRecomendacoesFilmes() {
-        //TODO realizar chamada
-        return Collections.emptyList();
+        return filmesService.getRecomendacoesFilmes();
     }
 
     @Override
     @PostMapping("/{id}/assistir")
     public void assistirFilme(@PathVariable("id") final Long id) {
-        //TODO realizar chamada
+        filmesService.assistirFilme(id);
     }
 }

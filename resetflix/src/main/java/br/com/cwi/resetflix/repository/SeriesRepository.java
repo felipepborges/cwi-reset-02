@@ -2,6 +2,7 @@ package br.com.cwi.resetflix.repository;
 
 import br.com.cwi.resetflix.domain.Genero;
 import br.com.cwi.resetflix.entity.SerieEntity;
+import br.com.cwi.resetflix.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class SeriesRepository {
                 return serieEntity;
             }
         }
-        return null;
+        throw new NotFoundException("Série não encontrada");
     }
 
     public Long criarSerie(final SerieEntity serieSalvar){

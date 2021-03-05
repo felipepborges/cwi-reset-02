@@ -2,16 +2,20 @@ package br.com.cwi.resetflix.repository;
 
 import br.com.cwi.resetflix.domain.Genero;
 import br.com.cwi.resetflix.entity.FilmeEntity;
+import br.com.cwi.resetflix.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Repository
 public class FilmesRepository {
 
     static List<FilmeEntity> filmes = new ArrayList<>();
+    static List<FilmeEntity> filmesAssistidos = new ArrayList<>();
     static Long contadorIds = 1l;
+
+    Map<Genero, Long> numeroVisualizacoesPorGenero = new HashMap<>();
 
 
     public List<FilmeEntity> getFilmes(Genero genero){
@@ -59,7 +63,7 @@ public class FilmesRepository {
                 return filmeEntity;
             }
         }
-        return null;
+        throw new NotFoundException("Filme não encontrado");
     }
 
     public Long criarFilme(final FilmeEntity filmeSalvar){
@@ -70,5 +74,43 @@ public class FilmesRepository {
         filmes.add(filmeSalvar);
 
         return filmeSalvar.getId();
+    }
+
+    public void assistir(Long id){
+        filmesAssistidos.add(acharFilmeById(id));
+        salvarNumeroVisualizacoesPorGenero(acharFilmeById(id).getGenero());
+    }
+
+    public List<FilmeEntity> getRecomendacoes(){
+
+        List<FilmeEntity> filmesRecomendados = filmes;
+        //exclui os filmes assistidos da lista filmeRecomendados e diferentes do genero mais visualizado
+        for(FilmeEntity filmeEntity : filmesRecomendados){
+            if (filmesAssistidos.contains(filmeEntity) || filmeEntity.getGenero() != getGeneroMaisVisualizado()) {
+                filmesRecomendados.remove(filmeEntity);
+            }
+        }
+        return filmesRecomendados; //retorna todos os filmes cadastrados do genero mais visualizado
+    }
+
+    public void salvarNumeroVisualizacoesPorGenero(Genero genero){
+        if(numeroVisualizacoesPorGenero.containsKey(genero)){
+            numeroVisualizacoesPorGenero.put(genero, numeroVisualizacoesPorGenero.get(genero)+1);
+        }
+        numeroVisualizacoesPorGenero.put(genero, 1l);
+    }
+
+    public Genero getGeneroMaisVisualizado(){
+        Map.Entry<Genero, Long> maisVisualizado = null;
+        for(Map.Entry<Genero, Long> e: numeroVisualizacoesPorGenero.entrySet()){
+            if(maisVisualizado == null || e.getValue().compareTo(maisVisualizado.getValue()) > 0){
+                maisVisualizado = e;
+            }
+        }
+        try{
+            return maisVisualizado.getKey();
+        }catch (NullPointerException e){
+            return null;
+        }
     }
 }
